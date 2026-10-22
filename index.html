@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171717">
+<title>SALSERO | Menú</title>
+<style>
+  :root { --dark:#171717; --red:#E53935; --yellow:#FFC107; --cream:#FFF3D6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial,Helvetica,sans-serif; background:#fffaf0; color:var(--dark); }
+  header { background:var(--dark); color:var(--cream); text-align:center; padding:30px 18px 25px; border-bottom:5px solid var(--red); }
+  .logo { font-size:clamp(2.4rem,9vw,4rem); font-weight:900; font-style:italic; letter-spacing:1px; color:var(--yellow); line-height:1; }
+  .tagline { margin-top:10px; font-weight:bold; letter-spacing:2px; font-size:.82rem; }
+  .intro { max-width:760px; margin:0 auto; padding:24px 18px 8px; text-align:center; }
+  .intro h1 { margin:0 0 8px; font-size:1.8rem; }
+  .intro p { margin:0; color:#555; line-height:1.5; }
+  .menu { max-width:850px; margin:18px auto 30px; padding:0 15px; display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:15px; }
+  .item { background:white; border:1px solid #eee3d2; border-radius:16px; padding:18px; box-shadow:0 5px 18px #1717170b; display:flex; flex-direction:column; }
+  .item .emoji { font-size:2.3rem; }
+  .item h2 { font-size:1.15rem; margin:10px 0 7px; }
+  .item p { color:#5d5d5d; font-size:.94rem; line-height:1.45; margin:0 0 14px; flex:1; }
+  .price { font-size:1.35rem; font-weight:900; margin-bottom:13px; }
+  .order { display:block; width:100%; border:0; border-radius:10px; background:#25D366; color:#082b15; padding:13px 12px; font-size:1rem; font-weight:800; text-align:center; text-decoration:none; cursor:pointer; }
+  .order:hover { filter:brightness(.96); }
+  .notice { max-width:820px; margin:0 auto 25px; padding:0 18px; text-align:center; font-size:.84rem; color:#666; }
+  footer { background:var(--dark); color:#eee; text-align:center; padding:20px 15px; font-size:.9rem; }
+  footer strong { color:var(--yellow); }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">SALSERO</div>
+  <div class="tagline">ALITAS • SALSAS • PAPAS</div>
+</header>
+
+<section class="intro">
+  <h1>¡Elige tu antojo!</h1>
+  <p>Escoge tu combo y toca <strong>“Pedir por WhatsApp”</strong>. Te llevaremos al chat con tu pedido preparado.</p>
+</section>
+
+<main class="menu" id="menu">
+  <article class="item">
+    <div class="emoji">🍗</div>
+    <h2>Combo Clásico</h2>
+    <p>6 alitas bañadas en 2 salsas a elección + porción de papas fritas.</p>
+    <div class="price">Bs 40</div>
+    <a class="order" href="#" onclick="pedir('Combo Clásico',40);return false;">Pedir por WhatsApp</a>
+  </article>
+
+  <article class="item">
+    <div class="emoji">🔥</div>
+    <h2>Combo Picantito</h2>
+    <p>Alitas con salsa picante y papas fritas. Ideal para quienes quieren más intensidad.</p>
+    <div class="price">Bs 45</div>
+    <a class="order" href="#" onclick="pedir('Combo Picantito',45);return false;">Pedir por WhatsApp</a>
+  </article>
+
+  <article class="item">
+    <div class="emoji">🍯</div>
+    <h2>Combo Dulce & Salado</h2>
+    <p>Alitas con salsa dulce de la casa y papas fritas.</p>
+    <div class="price">Bs 45</div>
+    <a class="order" href="#" onclick="pedir('Combo Dulce & Salado',45);return false;">Pedir por WhatsApp</a>
+  </article>
+
+  <article class="item">
+    <div class="emoji">🍗🍟</div>
+    <h2>Combo para compartir</h2>
+    <p>12 alitas, hasta 3 sabores de salsa y porción grande de papas. (Edita la descripción y precio según tu oferta.)</p>
+    <div class="price">Bs 75</div>
+    <a class="order" href="#" onclick="pedir('Combo para compartir',75);return false;">Pedir por WhatsApp</a>
+  </article>
+</main>
+
+<div class="notice">Puedes cambiar nombres, descripciones y precios para que coincidan con tu menú real.</div>
+<footer><strong>SALSERO</strong><br>Alitas • Salsas • Papas<br>Pedidos directos por WhatsApp</footer>
+
+<script>
+  // IMPORTANTE: cambia este número por tu WhatsApp con código de país.
+  // Bolivia: 591 + número, sin +, espacios ni guiones.
+  const WHATSAPP_NUMBER = "59179712308";
+
+  function pedir(producto, precio) {
+    if (WHATSAPP_NUMBER.includes("X")) {
+      alert("Antes de publicar, reemplaza 591XXXXXXXXX por tu número de WhatsApp en el archivo HTML.");
+      return;
+    }
+    const mensaje = `¡Hola SALSERO! Quiero hacer un pedido:\n• ${producto} — Bs ${precio}\n\n¿Me confirman disponibilidad y costo de envío?`;
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+</script>
+</body>
+</html>
