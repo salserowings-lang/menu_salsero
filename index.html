@@ -30,8 +30,27 @@
   footer strong { color:var(--yellow); }
 </style>
 </head>
-<body>
+<body><div style="position:sticky;top:10px;background:#fff;padding:12px;border:2px solid #f26522;border-radius:12px;margin:10px;z-index:99;">
+  <h4>🛒 Mi pedido</h4>
+  <div id="listaCarrito"></div>
+
+  <div style="margin:10px 0;padding:10px;border:1px solid #ddd;border-radius:10px;">
+    <p>🍯 Elige hasta 2 salsas gratis:</p>
+    <div>
+      <label><input type="checkbox" onclick="toggleSalsa('Picante')"> Picante</label>
+      <label><input type="checkbox" onclick="toggleSalsa('Suave')"> Suave</label>
+      <label><input type="checkbox" onclick="toggleSalsa('Dulce')"> Dulce</label>
+      <label><input type="checkbox" onclick="toggleSalsa('Ajo‑crema')"> Ajo‑crema</label>
+    </div>
+  </div>
+
+  <div><strong>Total: Bs <span id="totalCarrito">0</span></strong></div>
+  <button onclick="enviarWhatsapp()" style="margin-top:8px;padding:8px 12px;background:#25d366;color:#fff;border:none;border-radius:8px;">Enviar por WhatsApp</button>
+  <button onclick="vaciarCarrito()" style="margin-top:8px;margin-left:6px;padding:8px 12px;background:#999;color:#fff;border:none;border-radius:8px;">Vaciar</button>
+</div>
 <header>
+  <div style="text‑align:center; margin‑b…
+
   <div style="text-align:center; margin-bottom:12px;">
   <img src="logo-salsero.png" alt="Logo SALSERO" style="max-width:170px; height:auto;">
 </div>
@@ -45,92 +64,116 @@
 </section>
 
 <main class="menu" id="menu">
-  <article class="item">
-    <div class="emoji">🍗</div>
-    <h2>Combo Clásico</h2>
-    <p>6 alitas bañadas en 2 salsas a elección + porción de papas fritas.</p>
-    <div class="price">Bs 40</div>
-    <a class="order" href="#" onclick="pedir('Combo Clásico',40);return false;">Pedir por WhatsApp</a>
-  </article>
+<article class="item">
+  <div class="emoji">🍗</div>
+  <h2>Combo Clásico</h2>
+  <p>Alitas crujientes, sabor tradicional que nunca falla</p>
+  <div class="price">Bs 32</div>
+  <button onclick="agregarAlCarrito('Combo Clásico',32)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
+  <p style="font-size:14px;color:#555;">Extras rápidos:
+  <button onclick="agregarExtra('Papa frita')" style="padding:4px 6px;font-size:12px;">+Papa 12</button>
+  <button onclick="agregarExtra('Yuca frita')" style="padding:4px 6px;font-size:12px;">+Yuca 10</button>
+  <button onclick="agregarExtra('Plátano frito')" style="padding:4px 6px;font-size:12px;">+Plátano 10</button>
+  <button onclick="agregarExtra('Coca‑Cola 500ml')" style="padding:4px 6px;font-size:12px;">+Coca 10</button>
+  </p>
+</article>
 
-  <article class="item">
-    <div class="emoji">🔥</div>
-    <h2>Combo Picantito</h2>
-    <p>Alitas con salsa picante y papas fritas. Ideal para quienes quieren más intensidad.</p>
-    <div class="price">Bs 45</div>
-    <a class="order" href="#" onclick="pedir('Combo Picantito',45);return false;">Pedir por WhatsApp</a>
-  </article>
+<article class="item">
+  <div class="emoji">🔥</div>
+  <h2>Combo Picantito</h2>
+  <p>Alitas con toque picante que te hace volver por más</p>
+  <div class="price">Bs 36</div>
+  <button onclick="agregarAlCarrito('Combo Picantito',36)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
+  <p style="font-size:14px;color:#555;">Extras rápidos:
+  <button onclick="agregarExtra('Papa frita')" style="padding:4px 6px;font-size:12px;">+Papa 12</button>
+  <button onclick="agregarExtra('Yuca frita')" style="padding:4px 6px;font-size:12px;">+Yuca 10</button>
+  <button onclick="agregarExtra('Plátano frito')" style="padding:4px 6px;font-size:12px;">+Plátano 10</button>
+  <button onclick="agregarExtra('Sprite 500ml')" style="padding:4px 6px;font-size:12px;">+Sprite 10</button>
+  </p>
+</article>
 
-  <article class="item">
-    <div class="emoji">🍯</div>
-    <h2>Combo Dulce & Salado</h2>
-    <p>Alitas con salsa dulce de la casa y papas fritas.</p>
-    <div class="price">Bs 45</div>
-    <a class="order" href="#" onclick="pedir('Combo Dulce & Salado',45);return false;">Pedir por WhatsApp</a>
-  </article>
+<article class="item">
+  <div class="emoji">🍯</div>
+  <h2>Combo Dulce</h2>
+  <p>Alitas con glaseado dulce, ideal para quienes aman lo suave</p>
+  <div class="price">Bs 34</div>
+  <button onclick="agregarAlCarrito('Combo Dulce',34)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
+  <p style="font-size:14px;color:#555;">Extras rápidos:
+  <button onclick="agregarExtra('Papa frita')" style="padding:4px 6px;font-size:12px;">+Papa 12</button>
+  <button onclick="agregarExtra('Yuca frita')" style="padding:4px 6px;font-size:12px;">+Yuca 10</button>
+  <button onclick="agregarExtra('Plátano frito')" style="padding:4px 6px;font-size:12px;">+Plátano 10</button>
+  <button onclick="agregarExtra('Fanta 500ml')" style="padding:4px 6px;font-size:12px;">+Fanta 10</button>
+  </p>
+</article>
 
-  <article class="item">
-    <div class="emoji">🍗🍟</div>
-    <h2>Combo para compartir</h2>
-    <p>12 alitas, hasta 3 sabores de salsa y porción grande de papas. (Edita la descripción y precio según tu oferta.)</p>
-    <div class="price">Bs 75</div>
-    <a class="order" href="#" onclick="pedir('Combo para compartir',75);return false;">Pedir por WhatsApp</a>
-  </article>
+<article class="item">
+  <div class="emoji">👨‍👩‍👧‍👦</div>
+  <h2>Combo para Compartir</h2>
+  <p>Porción grande de alitas para disfrutar entre amigos o familia</p>
+  <div class="price">Bs 58</div>
+  <button onclick="agregarAlCarrito('Combo para Compartir',58)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
+  <p style="font-size:14px;color:#555;">Extras rápidos:
+  <button onclick="agregarExtra('Papa frita')" style="padding:4px 6px;font-size:12px;">+Papa 12</button>
+  <button onclick="agregarExtra('Yuca frita')" style="padding:4px 6px;font-size:12px;">+Yuca 10</button>
+  <button onclick="agregarExtra('Plátano frito')" style="padding:4px 6px;font-size:12px;">+Plátano 10</button>
+  <button onclick="agregarExtra('Coca‑Cola 2L')" style="padding:4px 6px;font-size:12px;">+Coca 2L 20</button>
+  </p>
+</article>
+
 <article class="item">
   <div class="emoji">🍟</div>
-  <h2>Porción de papas fritas</h2>
-  <p>Crujientes por fuera, suaves por dentro, recién salidas del aceite !</p>
+  <h2>Papa frita</h2>
+  <p>Crujiente porción de papas doradas recién hechas</p>
   <div class="price">Bs 12</div>
-  <a class="order" href="#" onclick="pedir('Porción de papas fritas',12)">Pedir por WhatsApp</a>
+  <button onclick="agregarAlCarrito('Papa frita',12)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
 </article>
 
 <article class="item">
   <div class="emoji">🥔</div>
-  <h2>Porción de yuca frita</h2>
-  <p>Suave por dentro y doradita, un clásico que no puede faltar !</p>
+  <h2>Yuca frita</h2>
+  <p>Suave por dentro y crujiente por fuera</p>
   <div class="price">Bs 10</div>
-  <a class="order" href="#" onclick="pedir('Porción de yuca frita',10)">Pedir por WhatsApp</a>
+  <button onclick="agregarAlCarrito('Yuca frita',10)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
 </article>
 
 <article class="item">
   <div class="emoji">🍌</div>
-  <h2>Porción de plátano frito</h2>
-  <p>Dulce y dorado, el toque rico para acompañar tus alitas !</p>
+  <h2>Plátano frito</h2>
+  <p>Dulce y dorado, el toque ideal para acompañar</p>
   <div class="price">Bs 10</div>
-  <a class="order" href="#" onclick="pedir('Porción de plátano frito',10)">Pedir por WhatsApp</a>
+  <button onclick="agregarAlCarrito('Plátano frito',10)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
 </article>
 
 <article class="item">
   <div class="emoji">🥤</div>
   <h2>Coca‑Cola 500 ml</h2>
-  <p>Refrescante, para disfrutar solo o junto a tus alitas !</p>
+  <p>Refrescante botella personal</p>
   <div class="price">Bs 10</div>
-  <a class="order" href="#" onclick="pedir('Coca‑Cola 500 ml',10)">Pedir por WhatsApp</a>
+  <button onclick="agregarAlCarrito('Coca‑Cola 500ml',10)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
 </article>
 
 <article class="item">
   <div class="emoji">🥤</div>
   <h2>Sprite 500 ml</h2>
-  <p>Suave y con gas, ideal para calmar el picante !</p>
+  <p>Gaseosa cítrica bien fría</p>
   <div class="price">Bs 10</div>
-  <a class="order" href="#" onclick="pedir('Sprite 500 ml',10)">Pedir por WhatsApp</a>
+  <button onclick="agregarAlCarrito('Sprite 500ml',10)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
 </article>
 
 <article class="item">
   <div class="emoji">🥤</div>
   <h2>Fanta 500 ml</h2>
-  <p>Sabor naranja bien fresco para acompañar tu pedido !</p>
+  <p>Sabor naranja refrescante</p>
   <div class="price">Bs 10</div>
-  <a class="order" href="#" onclick="pedir('Fanta 500 ml',10)">Pedir por WhatsApp</a>
+  <button onclick="agregarAlCarrito('Fanta 500ml',10)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
 </article>
 
 <article class="item">
   <div class="emoji">🍾</div>
   <h2>Coca‑Cola 2 L</h2>
-  <p>Grande y refrescante, perfecta para compartir entre varios !</p>
+  <p>Grande y refrescante para compartir</p>
   <div class="price">Bs 20</div>
-  <a class="order" href="#" onclick="pedir('Coca‑Cola 2 L',20)">Pedir por WhatsApp</a>
-</article>
+  <button onclick="agregarAlCarrito('Coca‑Cola 2L',20)" style="padding:8px 12px;background:#f26522;color:#fff;border:none;border-radius:8px;margin:4px;">+ Agregar al carrito</button>
 </main>
 <div style="text-align:center; margin:30px 18px;">
   <p>Síguenos en nuestras redes</p>
@@ -139,21 +182,77 @@
 </div>
 <div class="notice">Puedes cambiar nombres, descripciones y precios para que coincidan con tu menú real.</div>
 <footer><strong>SALSERO</strong><br>Alitas • Salsas • Papas<br>Pedidos directos por WhatsApp</footer>
-
 <script>
-  // IMPORTANTE: cambia este número por tu WhatsApp con código de país.
-  // Bolivia: 591 + número, sin +, espacios ni guiones.
-  const WHATSAPP_NUMBER = "59179712308";
+let carrito = [];
+let salsasElegidas = [];
+const listaSalsas = ["Picante","Suave","Dulce","Ajo‑crema"];
+const extras = {
+  "Papa frita":12,
+  "Yuca frita":10,
+  "Plátano frito":10,
+  "Coca‑Cola 500ml":10,
+  "Sprite 500ml":10,
+  "Fanta 500ml":10,
+  "Coca‑Cola 2L":20
+};
 
-  function pedir(producto, precio) {
-    if (WHATSAPP_NUMBER.includes("X")) {
-      alert("Antes de publicar, reemplaza 591XXXXXXXXX por tu número de WhatsApp en el archivo HTML.");
-      return;
+function agregarAlCarrito(nombre,precio){
+  carrito.push({nombre,precio});
+  actualizarCarrito();
+}
+function agregarExtra(nombreExtra){
+  agregarAlCarrito(nombreExtra, extras[nombreExtra]);
+}
+function actualizarCarrito(){
+  let lista = document.getElementById('listaCarrito');
+  let total = 0;
+  lista.innerHTML = '';
+  carrito.forEach((item,i)=>{
+    lista.innerHTML += `<div>${item.nombre} ‑ Bs ${item.precio} <button onclick="quitar(${i})">✖</button></div>`;
+    total += item.precio;
+  });
+  document.getElementById('totalCarrito').textContent = total;
+}
+function quitar(i){
+  carrito.splice(i,1);
+  actualizarCarrito();
+}
+function vaciarCarrito(){
+  carrito = [];
+  salsasElegidas = [];
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb=>cb.checked=false);
+  actualizarCarrito();
+}
+function toggleSalsa(nombre){
+  const idx = salsasElegidas.indexOf(nombre);
+  if(idx > -1){
+    salsasElegidas.splice(idx,1);
+  }else{
+    if(salsasElegidas.length < 2){
+      salsasElegidas.push(nombre);
+    }else{
+      alert("Solo puedes elegir 2 salsas gratis");
+      event.target.checked = false;
     }
-    const mensaje = `¡Hola SALSERO! Quiero hacer un pedido:\n• ${producto} — Bs ${precio}\n\n¿Me confirman disponibilidad y costo de envío?`;
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
   }
+}
+function enviarWhatsapp(){
+  if(carrito.length === 0) return alert('Agrega al menos un producto');
+  let nota = prompt('Indicaciones adicionales:');
+  let texto = 'Hola Salsero, pido:\n';
+  let suma = 0;
+  carrito.forEach(it=>{
+    texto += `‑ ${it.nombre} Bs ${it.precio}\n`;
+    suma += it.precio;
+  });
+  texto += `\nTotal: Bs ${suma}`;
+  if(salsasElegidas.length > 0){
+    texto += `\nSalsas elegidas (2 gratis): ${salsasElegidas.join(", ")}`;
+  }
+  if(nota) texto += `\nNota: ${nota}`;
+  window.open('https://wa.me/+59179712308?text=' + encodeURIComponent(texto));
+}
 </script>
+
 </body>
 </html>
