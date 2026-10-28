@@ -238,20 +238,19 @@ function toggleSalsa(nombre){
 }
 function enviarWhatsapp(){
   if(carrito.length === 0) return alert('Agrega al menos un producto');
-  let nota = prompt('Indicaciones adicionales:');
   let texto = 'Hola Salsero, pido:\n';
   let suma = 0;
   carrito.forEach(it=>{
-    texto += `‑ ${it.nombre} Bs ${it.precio}\n`;
+    texto += `- ${it.nombre} Bs ${it.precio}\n`;
     suma += it.precio;
   });
   texto += `\nTotal: Bs ${suma}`;
   if(salsasElegidas.length > 0){
     texto += `\nSalsas elegidas (2 gratis): ${salsasElegidas.join(", ")}`;
   }
-  if(nota) texto += `\nNota: ${nota}`;
   window.open('https://wa.me/+59179712308?text=' + encodeURIComponent(texto));
 }
+
 </script>
 
 </body>
